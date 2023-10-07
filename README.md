@@ -14,3 +14,13 @@ Implementation has four stages:
 3. Execute verifications: This stage uses the verification questions generated in the previous stage and the schema as inputs. The LLM is expected to answer each verification question using the schema as a knowledge base. See `execute_plan() in model/planner.py`
    
 4. Final response: This uses the original english question, the schema, sql from the baseline response, and the set of verification questions and answers from stages 2 and 3. The output is a final sql query. See `model/assembler.py`
+
+## Usage ##
+1. Clone the repo with `git clone https://github.com/cswamy/text-2-sql-cove.git`
+2. Create a `.env` file under `model`. Add `OPENAI_API_KEY=<YOUR-API-KEY>`
+3. Create predictions against the dev dataset using `python cove.py`. 🚨 This will run predictions against the full dev spider dataset (found in `data/dev.json`). To run it against a smaller sample, use options. For e.g., `python cove.py --sample_size 100 --seed 42`
+4. Output folder can be found under `experiments/` with `pred_sqls.txt` for predicted sqls, `gold_sqls.txt` for gold sqls from dev dataset and `outputs.json` file which is a list of dictionaries containing outputs for each sample in dev dataset. A `metrics.json` file is also created under `experiments/` with some useful statistics (e.g. token counts) for the run
+5. Run `cd evaluation` to enter folder with evaluation scripts from Spider
+6. Run `python evaluation.py --gold '<PATH TO OUTPUT FOLDER>/gold_sqls.txt' --pred '<PATH TO OUTPUT FOLDER>/pred_sqls.txt' --etype  'all' --db '../data/database/' --table '../data/tables.json' > '<PATH TO OUTPUT FOLDER>/result.txt'`
+7. This will create a `result.txt` file in the output folder with evaluation metrics from Spider
+8. _Optional: To analyse sql results, go into the experiments folder and run `python sql_executor.py --outputfile <PATH TO outputs.json> > <PATH TO OUTPUT FOLDER>/sql_results.txt`. This will create an `sql_results.txt` file under output folder where you can analyse sql outputs_ 
