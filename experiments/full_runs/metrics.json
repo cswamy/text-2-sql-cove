@@ -1,0 +1,47 @@
+[
+    {
+        "avg_input_tokens": 1684,
+        "avg_output_tokens": 192,
+        "avg_time": 11.46,
+        "sample_size": null,
+        "seed": null,
+        "topn": 3,
+        "model": "gpt-3.5-turbo"
+    },
+    {
+        "avg_input_tokens": 1580,
+        "avg_output_tokens": 209,
+        "avg_time": 17.14,
+        "sample_size": null,
+        "seed": null,
+        "topn": 0,
+        "model": "gpt-3.5-turbo"
+    },
+    {
+        "avg_input_tokens": 1706,
+        "avg_output_tokens": 194,
+        "avg_time": 9.42,
+        "sample_size": null,
+        "seed": null,
+        "topn": 3,
+        "model": "gpt-3.5-turbo"
+    },
+    {
+        "avg_input_tokens": 1705,
+        "avg_output_tokens": 194,
+        "avg_time": 13.82,
+        "sample_size": null,
+        "seed": null,
+        "topn": 3,
+        "model": "gpt-3.5-turbo"
+    },
+    {
+        "avg_input_tokens": 1583,
+        "avg_output_tokens": 211,
+        "avg_time": 16.59,
+        "sample_size": null,
+        "seed": null,
+        "topn": 3,
+        "model": "gpt-3.5-turbo"
+    }
+]
