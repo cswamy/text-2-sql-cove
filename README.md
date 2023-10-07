@@ -24,3 +24,21 @@ Implementation has four stages:
 6. Run `python evaluation.py --gold '<PATH TO OUTPUT FOLDER>/gold_sqls.txt' --pred '<PATH TO OUTPUT FOLDER>/pred_sqls.txt' --etype  'all' --db '../data/database/' --table '../data/tables.json' > '<PATH TO OUTPUT FOLDER>/result.txt'`
 7. This will create a `result.txt` file in the output folder with evaluation metrics from Spider
 8. _Optional: To analyse sql results, go into the experiments folder and run `python sql_executor.py --outputfile <PATH TO outputs.json> > <PATH TO OUTPUT FOLDER>/sql_results.txt`. This will create an `sql_results.txt` file under output folder where you can analyse sql outputs_ 
+
+## Results ##
+Results to some experiments run on the full dev dataset:
+
+Experiment | Spider execution accuracy
+| :--- | :---:
+GPT-3.5-Turbo without CoVE and num_matches = 0 (baseline) | 42.4 
+GPT-3.5-Turbo without CoVE and num_matches = 3  | 64.9
+GPT-3.5-Turbo with CoVE and num_matches = 0  | 41.7
+GPT-3.5-Turbo with CoVE and num_matches = 3  | 63.2
+Notes:
+1. Choosing few-shot examples in stage 1 with `bert-base-uncased` embeddings and `cosine similarity` has a 2250bps improvement over baseline
+2. CoVe does not seem to add much improvements (at least with current prompts and GPT-3.5-Turbo)
+3. GPT-4 was tested for a small sample (n=100, seed=42) and achieved execution accuracy of 59.0
+
+## Potential next steps ##
+1. Try with a different LLM (e.g. Code LLama)
+2. Test different prompts, especially for baseline and final responses (stages 1 and 4)
