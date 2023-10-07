@@ -34,6 +34,7 @@ GPT-3.5-Turbo without CoVE and num_matches = 0 (baseline) | 42.4
 GPT-3.5-Turbo without CoVE and num_matches = 3  | 64.9
 GPT-3.5-Turbo with CoVE and num_matches = 0  | 41.7
 GPT-3.5-Turbo with CoVE and num_matches = 3  | 63.2
+
 Notes:
 1. Choosing few-shot examples in stage 1 with `bert-base-uncased` embeddings and `cosine similarity` has a 2250bps improvement over baseline
 2. CoVe does not seem to add much improvements (at least with current prompts and GPT-3.5-Turbo)
