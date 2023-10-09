@@ -17,7 +17,7 @@ Implementation has four stages:
 
 ## Usage ##
 1. Clone the repo with `git clone https://github.com/cswamy/text-2-sql-cove.git`
-2. Create a `.env` file under `model`. Add `OPENAI_API_KEY=<YOUR-API-KEY>`
+2. Run `export OPENAI_API_KEY="<your-openai-key>"` to setup OpenAI connection
 3. Create predictions against the dev dataset using `python cove.py`. 🚨 This will run predictions against the full dev spider dataset (found in `data/dev.json`). To run it against a smaller sample, use options. For e.g., `python cove.py --sample_size 100 --seed 42`
 4. Output folder can be found under `experiments/` with `pred_sqls.txt` for predicted sqls, `gold_sqls.txt` for gold sqls from dev dataset and `outputs.json` file which is a list of dictionaries containing outputs for each sample in dev dataset. A `metrics.json` file is also created under `experiments/` with some useful statistics (e.g. token counts) for the run
 5. Run `cd evaluation` to enter folder with evaluation scripts from Spider
