@@ -43,5 +43,14 @@
         "seed": null,
         "topn": 3,
         "model": "gpt-3.5-turbo"
+    },
+    {
+        "avg_input_tokens": 1941,
+        "avg_output_tokens": 450,
+        "avg_time": 28.35,
+        "sample_size": 100,
+        "seed": 42,
+        "topn": 3,
+        "model": "gpt-4-1106-preview"
     }
 ]

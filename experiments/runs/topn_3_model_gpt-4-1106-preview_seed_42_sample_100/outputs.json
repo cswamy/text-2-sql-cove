@@ -1,0 +1,1002 @@
+[
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT AirportCode FROM (  SELECT SourceAirport AS AirportCode  FROM flights  UNION ALL  SELECT DestAirport  FROM flights ) AS AllFlights GROUP BY AirportCode ORDER BY COUNT(*) ASC LIMIT 1; ```",
+        "input_tokens": 1616,
+        "output_tokens": 434,
+        "time": 26.799759125,
+        "question": "Give the code of the airport with the least flights.",
+        "db_id": "flight_2",
+        "gold_query": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport OR T1.AirportCode  =  T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) FROM Has_Pet JOIN Student ON Has_Pet.StuID = Student.StuID WHERE Student.Age > 20; ```",
+        "input_tokens": 2105,
+        "output_tokens": 663,
+        "time": 32.970069374999994,
+        "question": "Find number of pets owned by students who are older than 20.",
+        "db_id": "pets_1",
+        "gold_query": "SELECT count(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid WHERE T1.age  >  20"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT AVG(julianday(transcript_date)) - julianday('2000-01-01') AS average_print_date FROM Transcripts; ```",
+        "input_tokens": 3264,
+        "output_tokens": 462,
+        "time": 29.700891041999995,
+        "question": "On average, when were the transcripts printed?",
+        "db_id": "student_transcripts_tracking",
+        "gold_query": "SELECT avg(transcript_date) FROM Transcripts"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT name FROM battle WHERE bulgarian_commander = 'Kaloyan' AND latin_commander = 'Baldwin I'; ```",
+        "input_tokens": 1919,
+        "output_tokens": 595,
+        "time": 34.350374125,
+        "question": "What are the distinct battle names which are between bulgarian commander 'Kaloyan' and latin commander 'Baldwin I'?",
+        "db_id": "battle_death",
+        "gold_query": "SELECT name FROM battle WHERE bulgarian_commander  =  'Kaloyan' AND latin_commander  =  'Baldwin I'"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT first_name, last_name FROM players WHERE hand = 'L' ORDER BY birth_date;\n```",
+        "final_sql": "SELECT first_name, last_name FROM players WHERE hand = 'L' ORDER BY birth_date ASC; ```",
+        "input_tokens": 2147,
+        "output_tokens": 386,
+        "time": 28.92729295800001,
+        "question": "List the first and last name of all players who are left / L hand in the order of birth date.",
+        "db_id": "wta_1",
+        "gold_query": "SELECT first_name ,  last_name FROM players WHERE hand  =  'L' ORDER BY birth_date"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT s.Name FROM shop s LEFT JOIN hiring h ON s.Shop_ID = h.Shop_ID WHERE h.Employee_ID IS NULL; ```",
+        "input_tokens": 1850,
+        "output_tokens": 518,
+        "time": 37.243478458,
+        "question": "Find the name of the shops that do not hire any employee.",
+        "db_id": "employee_hire_evaluation",
+        "gold_query": "SELECT name FROM shop WHERE shop_id NOT IN (SELECT shop_id FROM hiring)"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) AS NumberOfFlightsArrivingInAberdeen FROM \"flights\" f JOIN \"airports\" a ON f.\"DestAirport\" = a.\"AirportCode\" WHERE a.\"City\" = 'Aberdeen'; ```",
+        "input_tokens": 1548,
+        "output_tokens": 539,
+        "time": 55.787831624999995,
+        "question": "How many flights arriving in Aberdeen city?",
+        "db_id": "flight_2",
+        "gold_query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode WHERE T2.City  =  \"Aberdeen\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT c.CountryId, c.CountryName FROM countries c LEFT JOIN car_makers cm ON c.CountryId = cm.Country LEFT JOIN model_list ml ON cm.Id = ml.Maker WHERE c.CountryId IN (   SELECT cm.Country   FROM car_makers cm   GROUP BY cm.Country   HAVING COUNT(cm.Id) > 3 ) OR ml.Model = 'Fiat'; ```",
+        "input_tokens": 2342,
+        "output_tokens": 775,
+        "time": 40.31812175000002,
+        "question": "What are the ids and names of all countries that either have more than 3 car makers or produce fiat model ?",
+        "db_id": "car_1",
+        "gold_query": "select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country group by t1.countryid having count(*)  >  3 union select t1.countryid ,  t1.countryname from countries as t1 join car_makers as t2 on t1.countryid  =  t2.country join model_list as t3 on t2.id  =  t3.maker where t3.model  =  'fiat';"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT name, grade FROM Highschooler;\n```",
+        "final_sql": "SELECT name, grade FROM Highschooler; ```",
+        "input_tokens": 1280,
+        "output_tokens": 212,
+        "time": 14.167239957999982,
+        "question": "Show the names and grades of each high schooler.",
+        "db_id": "network_1",
+        "gold_query": "SELECT name ,  grade FROM Highschooler"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT s.Fname, s.Age FROM Student s JOIN Has_Pet hp ON s.StuID = hp.StuID JOIN Pets p ON hp.PetID = p.PetID WHERE p.PetType = 'dog' AND s.StuID NOT IN (   SELECT s.StuID   FROM Student s   JOIN Has_Pet hp ON s.StuID = hp.StuID   JOIN Pets p ON hp.PetID = p.PetID   WHERE p.PetType = 'cat' ) GROUP BY s.StuID; ```",
+        "input_tokens": 1734,
+        "output_tokens": 528,
+        "time": 31.975076375000015,
+        "question": "Find the first name and age of students who have a dog but do not have a cat as a pet.",
+        "db_id": "pets_1",
+        "gold_query": "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'dog' AND T1.stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT s.Major, s.Age FROM Student s WHERE NOT EXISTS (  SELECT 1  FROM Has_Pet hp  JOIN Pets p ON hp.PetID = p.PetID  WHERE hp.StuID = s.StuID AND p.PetType = 'cat' ); ```",
+        "input_tokens": 1779,
+        "output_tokens": 578,
+        "time": 31.162025500000027,
+        "question": "Find the major and age of students who do not have a cat pet.",
+        "db_id": "pets_1",
+        "gold_query": "SELECT major ,  age FROM student WHERE stuid NOT IN (SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid JOIN pets AS T3 ON T3.petid  =  T2.petid WHERE T3.pettype  =  'cat')"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT model_list.ModelId, model_list.Model\nFROM model_list\nJOIN car_names ON model_list.ModelId = car_names.MakeId\nJOIN cars_data ON car_names.MakeId = cars_data.Id\nORDER BY CAST(cars_data.Horsepower AS INTEGER) ASC\nLIMIT 1;\n```",
+        "final_sql": "SELECT model_list.Model FROM model_list JOIN car_names ON model_list.Model = car_names.Model JOIN cars_data ON car_names.MakeId = cars_data.Id WHERE cars_data.Horsepower != 'NA' ORDER BY CAST(cars_data.Horsepower AS INTEGER) ASC LIMIT 1; ```",
+        "input_tokens": 2212,
+        "output_tokens": 633,
+        "time": 36.57044508299998,
+        "question": "Which model of the car has the minimum horsepower?",
+        "db_id": "car_1",
+        "gold_query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id ORDER BY T2.horsepower ASC LIMIT 1;"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT a.City\nFROM airports a\nJOIN flights f ON a.AirportCode = f.SourceAirport\nGROUP BY a.City\nORDER BY COUNT(*) DESC\nLIMIT 1;\n```",
+        "final_sql": "SELECT a.City FROM airports a JOIN flights f ON a.AirportCode = f.SourceAirport GROUP BY a.City ORDER BY COUNT(f.SourceAirport) DESC LIMIT 1; ```",
+        "input_tokens": 1453,
+        "output_tokens": 316,
+        "time": 21.101016541999968,
+        "question": "Which city has most number of departing flights?",
+        "db_id": "flight_2",
+        "gold_query": "SELECT T1.City FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.SourceAirport GROUP BY T1.City ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT a.Airline FROM airlines a JOIN flights f1 ON a.uid = f1.Airline JOIN flights f2 ON a.uid = f2.Airline WHERE f1.SourceAirport = 'APG' AND f2.SourceAirport = 'CVO' GROUP BY a.Airline HAVING COUNT(DISTINCT f1.SourceAirport) > 0 AND COUNT(DISTINCT f2.SourceAirport) > 0; ```",
+        "input_tokens": 1314,
+        "output_tokens": 243,
+        "time": 15.57010200000002,
+        "question": "Which airlines have departing flights from both APG and CVO airports?",
+        "db_id": "flight_2",
+        "gold_query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"APG\" INTERSECT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"CVO\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(DISTINCT department_id) FROM Degree_Programs;\n```",
+        "final_sql": "SELECT COUNT(DISTINCT department_id) FROM Degree_Programs; ```",
+        "input_tokens": 3234,
+        "output_tokens": 434,
+        "time": 27.11703162500004,
+        "question": "How many departments offer any degree?",
+        "db_id": "student_transcripts_tracking",
+        "gold_query": "SELECT count(DISTINCT department_id) FROM Degree_Programs"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT \"Episode\", \"Rating\" FROM \"TV_series\" WHERE \"Rating\" IS NOT NULL ORDER BY \"Rating\" DESC LIMIT 3; ```",
+        "input_tokens": 2341,
+        "output_tokens": 686,
+        "time": 39.49423225000004,
+        "question": "What are 3 most highly rated episodes in the TV series table and what were those ratings?",
+        "db_id": "tvshow",
+        "gold_query": "SELECT Episode ,  Rating FROM TV_series ORDER BY Rating DESC LIMIT 3;"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT \"Year\" FROM concert GROUP BY \"Year\" ORDER BY COUNT(*) DESC LIMIT 1;\n```",
+        "final_sql": "SELECT \"Year\" FROM concert GROUP BY \"Year\" ORDER BY COUNT(*) DESC LIMIT 1; ```",
+        "input_tokens": 1795,
+        "output_tokens": 364,
+        "time": 23.851348749999943,
+        "question": "What is the year that had the most concerts?",
+        "db_id": "concert_singer",
+        "gold_query": "SELECT YEAR FROM concert GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT t.transcript_id, t.transcript_date FROM Transcripts t LEFT JOIN Transcript_Contents tc ON t.transcript_id = tc.transcript_id GROUP BY t.transcript_id, t.transcript_date ORDER BY COUNT(tc.student_course_id) ASC LIMIT 1; ```",
+        "input_tokens": 3454,
+        "output_tokens": 619,
+        "time": 37.963944416000004,
+        "question": "What is the date and id of the transcript with the least number of results?",
+        "db_id": "student_transcripts_tracking",
+        "gold_query": "SELECT T2.transcript_date ,  T1.transcript_id FROM Transcript_Contents AS T1 JOIN Transcripts AS T2 ON T1.transcript_id  =  T2.transcript_id GROUP BY T1.transcript_id ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM flights WHERE SourceAirport = 'APG';\n```",
+        "final_sql": "SELECT COUNT(*) FROM flights WHERE SourceAirport = 'APG'; ```",
+        "input_tokens": 1459,
+        "output_tokens": 330,
+        "time": 20.42443283399996,
+        "question": "How many flights depart from 'APG'?",
+        "db_id": "flight_2",
+        "gold_query": "SELECT count(*) FROM FLIGHTS WHERE SourceAirport  =  \"APG\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(DISTINCT Language) FROM countrylanguage;\n```",
+        "final_sql": "SELECT COUNT(DISTINCT Language) FROM countrylanguage; ```",
+        "input_tokens": 1701,
+        "output_tokens": 343,
+        "time": 21.893125124999983,
+        "question": "What is the number of distinct languages used around the world?",
+        "db_id": "world_1",
+        "gold_query": "SELECT count(DISTINCT LANGUAGE) FROM countrylanguage"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT p.Birth_Date FROM poker_player pp JOIN people p ON pp.People_ID = p.People_ID ORDER BY pp.Earnings ASC LIMIT 1; ```",
+        "input_tokens": 1753,
+        "output_tokens": 536,
+        "time": 31.90804470799992,
+        "question": "What is the birth date of the poker player with the lowest earnings?",
+        "db_id": "poker_player",
+        "gold_query": "SELECT T1.Birth_Date FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Earnings ASC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT AVG(\"LifeExpectancy\") FROM \"country\" WHERE \"Region\" = 'Central Africa'; ```",
+        "input_tokens": 1797,
+        "output_tokens": 424,
+        "time": 23.300732584000002,
+        "question": "What is the average expected life expectancy for countries in the region of Central Africa?",
+        "db_id": "world_1",
+        "gold_query": "SELECT avg(LifeExpectancy) FROM country WHERE Region  =  \"Central Africa\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT first_name, middle_name, last_name FROM Students WHERE date_left IS NOT NULL ORDER BY date_left ASC LIMIT 1; ```",
+        "input_tokens": 3202,
+        "output_tokens": 343,
+        "time": 17.58550337500003,
+        "question": "What is the first, middle, and last name of the earliest school graduate?",
+        "db_id": "student_transcripts_tracking",
+        "gold_query": "SELECT first_name ,  middle_name ,  last_name FROM Students ORDER BY date_left ASC LIMIT 1"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM players;\n```",
+        "final_sql": "SELECT COUNT(*) FROM players; ```",
+        "input_tokens": 1837,
+        "output_tokens": 236,
+        "time": 14.479255040999988,
+        "question": "Find the total number of players.",
+        "db_id": "wta_1",
+        "gold_query": "SELECT count(*) FROM players"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT AirportCode FROM (  SELECT SourceAirport AS AirportCode  FROM flights  UNION ALL  SELECT DestAirport AS AirportCode  FROM flights ) AS AllFlights GROUP BY AirportCode ORDER BY COUNT(*) DESC LIMIT 1; ```",
+        "input_tokens": 1856,
+        "output_tokens": 615,
+        "time": 35.33382195799993,
+        "question": "What is the code of airport that has the highest number of flights?",
+        "db_id": "flight_2",
+        "gold_query": "SELECT T1.AirportCode FROM AIRPORTS AS T1 JOIN FLIGHTS AS T2 ON T1.AirportCode  =  T2.DestAirport OR T1.AirportCode  =  T2.SourceAirport GROUP BY T1.AirportCode ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT p.first_name, p.country_code FROM players p JOIN rankings r ON p.player_id = r.player_id WHERE r.tours = (SELECT MAX(tours) FROM rankings); ```",
+        "input_tokens": 2636,
+        "output_tokens": 630,
+        "time": 33.72279887499997,
+        "question": "Find the first name and country code of the player who did the most number of tours.",
+        "db_id": "wta_1",
+        "gold_query": "SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id ORDER BY T2.tours DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) AS English_Channel_Count FROM \"TV_Channel\" WHERE \"Language\" = 'English'; ```",
+        "input_tokens": 1850,
+        "output_tokens": 495,
+        "time": 28.220461,
+        "question": "How many TV Channel using language English?",
+        "db_id": "tvshow",
+        "gold_query": "SELECT count(*) FROM TV_Channel WHERE LANGUAGE = \"English\";"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT s.Name FROM shop s JOIN hiring h ON s.Shop_ID = h.Shop_ID GROUP BY s.Shop_ID ORDER BY COUNT(h.Employee_ID) DESC LIMIT 1; ```",
+        "input_tokens": 1811,
+        "output_tokens": 466,
+        "time": 25.05898691599998,
+        "question": "Which shop has the most employees? Give me the shop name.",
+        "db_id": "employee_hire_evaluation",
+        "gold_query": "SELECT t2.name FROM hiring AS t1 JOIN shop AS t2 ON t1.shop_id  =  t2.shop_id GROUP BY t1.shop_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Record_Company, Year_of_Founded FROM orchestra ORDER BY Year_of_Founded DESC; ```",
+        "input_tokens": 2024,
+        "output_tokens": 552,
+        "time": 36.06743449999999,
+        "question": "What are the record companies of orchestras in descending order of years in which they were founded?",
+        "db_id": "orchestra",
+        "gold_query": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT H2.name FROM Highschooler H1 JOIN Friend F ON H1.ID = F.student_id JOIN Highschooler H2 ON F.friend_id = H2.ID WHERE H1.name = 'Kyle'; ```",
+        "input_tokens": 1573,
+        "output_tokens": 465,
+        "time": 30.477869457999986,
+        "question": "Show the names of all of the high schooler Kyle's friends.",
+        "db_id": "network_1",
+        "gold_query": "SELECT T3.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id JOIN Highschooler AS T3 ON T1.friend_id  =  T3.id WHERE T2.name  =  \"Kyle\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT \"Name\", \"Song_release_year\" FROM \"singer\" WHERE \"Age\" = (SELECT MIN(\"Age\") FROM \"singer\"); ```",
+        "input_tokens": 1671,
+        "output_tokens": 229,
+        "time": 15.503552458000058,
+        "question": "Show the name and the release year of the song by the youngest singer.",
+        "db_id": "concert_singer",
+        "gold_query": "SELECT song_name ,  song_release_year FROM singer ORDER BY age LIMIT 1"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT a.Name\nFROM country a\nJOIN country b ON a.Population > b.Population AND b.Continent = 'Africa'\nWHERE a.Continent = 'Asia'\nGROUP BY a.Name\n```",
+        "final_sql": "SELECT Name FROM country WHERE Continent = 'Asia' AND Population > (  SELECT MAX(Population)  FROM country  WHERE Continent = 'Africa' ); ```",
+        "input_tokens": 2006,
+        "output_tokens": 581,
+        "time": 52.21095912499993,
+        "question": "What are the Asian countries which have a population larger than that of any country in Africa?",
+        "db_id": "world_1",
+        "gold_query": "SELECT Name FROM country WHERE Continent  =  \"Asia\"  AND population  >  (SELECT min(population) FROM country WHERE Continent  =  \"Africa\")"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT \"Name\" FROM \"conductor\" ORDER BY \"Age\"; ```",
+        "input_tokens": 1760,
+        "output_tokens": 344,
+        "time": 21.341117124999982,
+        "question": "What are the names of conductors, ordered by age?",
+        "db_id": "orchestra",
+        "gold_query": "SELECT Name FROM conductor ORDER BY Age ASC"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) FROM \"cars_data\" WHERE \"Cylinders\" > 6; ```",
+        "input_tokens": 1698,
+        "output_tokens": 201,
+        "time": 14.699459082999965,
+        "question": "How many cars has over 6 cylinders?",
+        "db_id": "car_1",
+        "gold_query": "SELECT COUNT(*) FROM CARS_DATA WHERE Cylinders  >  6;"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Population, LifeExpectancy FROM country WHERE Name = 'Brazil'; ```",
+        "input_tokens": 2031,
+        "output_tokens": 553,
+        "time": 31.57879954200007,
+        "question": "What are the population and life expectancies in Brazil?",
+        "db_id": "world_1",
+        "gold_query": "SELECT Population ,  LifeExpectancy FROM country WHERE Name  =  \"Brazil\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM matches;\n```",
+        "final_sql": "SELECT COUNT(*) FROM matches; ```",
+        "input_tokens": 1832,
+        "output_tokens": 247,
+        "time": 13.895831041999827,
+        "question": "Count the number of matches.",
+        "db_id": "wta_1",
+        "gold_query": "SELECT count(*) FROM matches"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Template_Type_Code, Template_Type_Description FROM Ref_Template_Types;\n```",
+        "final_sql": "SELECT Template_Type_Code, Template_Type_Description FROM Ref_Template_Types; ```",
+        "input_tokens": 1470,
+        "output_tokens": 163,
+        "time": 11.118691249999983,
+        "question": "What are the type codes and descriptions for all template types?",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT template_type_code ,  template_type_description FROM Ref_template_types"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Name FROM singer WHERE Citizenship != 'France'; ```",
+        "input_tokens": 1246,
+        "output_tokens": 266,
+        "time": 18.966213208,
+        "question": "List the name of singers whose citizenship is not \"France\".",
+        "db_id": "singer",
+        "gold_query": "SELECT Name FROM singer WHERE Citizenship != \"France\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) FROM cars_data WHERE Accelerate > (SELECT MAX(Accelerate) FROM cars_data WHERE Horsepower = (SELECT MAX(Horsepower) FROM cars_data WHERE Horsepower != 'NULL')) ```",
+        "input_tokens": 1668,
+        "output_tokens": 185,
+        "time": 12.57144004199995,
+        "question": "How many cars have a larger accelerate than the car with the largest horsepower?",
+        "db_id": "car_1",
+        "gold_query": "SELECT COUNT(*) FROM CARS_DATA WHERE Accelerate  >  ( SELECT Accelerate FROM CARS_DATA ORDER BY Horsepower DESC LIMIT 1 );"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) FROM flights JOIN airlines ON flights.Airline = airlines.uid JOIN airports ON flights.DestAirport = airports.AirportCode WHERE airlines.Airline = 'United Airlines' AND airports.City = 'Aberdeen'; ```",
+        "input_tokens": 1482,
+        "output_tokens": 269,
+        "time": 16.25592929200002,
+        "question": "Count the number of United Airlines flights that arrive in Aberdeen.",
+        "db_id": "flight_2",
+        "gold_query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRPORTS AS T2 ON T1.DestAirport  =  T2.AirportCode JOIN AIRLINES AS T3 ON T3.uid  =  T1.Airline WHERE T2.City  =  \"Aberdeen\" AND T3.Airline  =  \"United Airlines\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(DISTINCT o.owner_id) FROM Owners o LEFT JOIN Dogs d ON o.owner_id = d.owner_id WHERE d.dog_id IS NULL; ```",
+        "input_tokens": 2838,
+        "output_tokens": 508,
+        "time": 27.391645374999825,
+        "question": "How many owners temporarily do not have any dogs?",
+        "db_id": "dog_kennels",
+        "gold_query": "SELECT count(*) FROM Owners WHERE owner_id NOT IN ( SELECT owner_id FROM Dogs )"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT DISTINCT countrylanguage.CountryCode\nFROM countrylanguage\nWHERE countrylanguage.Language != 'English';\n```",
+        "final_sql": "SELECT DISTINCT cl.CountryCode FROM countrylanguage cl WHERE cl.Language != 'English' AND cl.CountryCode NOT IN (  SELECT cl2.CountryCode  FROM countrylanguage cl2  WHERE cl2.Language = 'English' ); ```",
+        "input_tokens": 1704,
+        "output_tokens": 369,
+        "time": 27.287727583000105,
+        "question": "Give the country codes for countries in which people speak langauges that are not English.",
+        "db_id": "world_1",
+        "gold_query": "SELECT DISTINCT CountryCode FROM countrylanguage WHERE LANGUAGE != \"English\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT T.Template_Type_Code\nFROM Templates AS T\nJOIN Documents AS D ON T.Template_ID = D.Template_ID\nGROUP BY T.Template_Type_Code\nORDER BY COUNT(D.Document_ID) DESC\nLIMIT 1;\n```",
+        "final_sql": "SELECT T.Template_Type_Code FROM Templates AS T JOIN Documents AS D ON T.Template_ID = D.Template_ID GROUP BY T.Template_Type_Code ORDER BY COUNT(D.Document_ID) DESC LIMIT 1; ```",
+        "input_tokens": 2015,
+        "output_tokens": 577,
+        "time": 36.396247583000104,
+        "question": "Return the code of the template type that is most commonly used in documents.",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT T1.template_type_code FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.template_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT ml.Model FROM model_list ml JOIN car_names cn ON ml.ModelId = cn.Model JOIN cars_data cd ON cn.MakeId = cd.Id WHERE cd.Year > 1980; ```",
+        "input_tokens": 2024,
+        "output_tokens": 449,
+        "time": 28.534149124999885,
+        "question": "What are the different models for the cards produced after 1980?",
+        "db_id": "car_1",
+        "gold_query": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year  >  1980;"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT cm.FullName, cm.Id, COUNT(ml.ModelId) AS NumberOfModels\nFROM car_makers cm\nJOIN model_list ml ON cm.Id = ml.Maker\nGROUP BY cm.Id;\n```",
+        "final_sql": "SELECT cm.FullName, cm.Id, COUNT(ml.ModelId) AS NumberOfModels FROM car_makers cm LEFT JOIN model_list ml ON cm.Id = ml.Maker GROUP BY cm.Id, cm.FullName; ```",
+        "input_tokens": 2251,
+        "output_tokens": 564,
+        "time": 47.18009912499997,
+        "question": "What is the full name of each car maker, along with its id and how many models it produces?",
+        "db_id": "car_1",
+        "gold_query": "SELECT T1.FullName ,  T1.Id ,  count(*) FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker GROUP BY T1.Id;"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT \"Name\" FROM \"teacher\" WHERE \"Age\" IN ('32', '33'); ```",
+        "input_tokens": 1307,
+        "output_tokens": 246,
+        "time": 17.165287875000104,
+        "question": "Show the name of teachers aged either 32 or 33?",
+        "db_id": "course_teach",
+        "gold_query": "SELECT Name FROM teacher WHERE Age  =  32 OR Age  =  33"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT cm.Maker FROM car_makers cm JOIN model_list ml ON cm.Id = ml.Maker JOIN car_names cn ON ml.Model = cn.Model JOIN cars_data cd ON cn.MakeId = cd.Id WHERE cd.Year = 1970; ```",
+        "input_tokens": 2152,
+        "output_tokens": 475,
+        "time": 25.10619595900016,
+        "question": "Find the name of the makers that produced some cars in the year of 1970?",
+        "db_id": "car_1",
+        "gold_query": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id  =  T2.Maker JOIN CAR_NAMES AS T3 ON T2.model  =  T3.model JOIN CARS_DATA AS T4 ON T3.MakeId  =  T4.id WHERE T4.year  =  '1970';"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT d.Document_ID, COUNT(p.Paragraph_ID) AS NumberOfParagraphs\nFROM Documents d\nJOIN Paragraphs p ON d.Document_ID = p.Document_ID\nGROUP BY d.Document_ID\nORDER BY d.Document_ID;\n```",
+        "final_sql": "SELECT d.Document_ID, COUNT(p.Paragraph_ID) AS NumberOfParagraphs FROM Documents d LEFT JOIN Paragraphs p ON d.Document_ID = p.Document_ID GROUP BY d.Document_ID ORDER BY d.Document_ID; ```",
+        "input_tokens": 1599,
+        "output_tokens": 275,
+        "time": 18.14099391700006,
+        "question": "Show all document ids and the number of paragraphs in each document. Order by document id.",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT document_id ,  count(*) FROM Paragraphs GROUP BY document_id ORDER BY document_id"
+    },
+    {
+        "baseline_sql": "SELECT name, grade FROM Highschooler;",
+        "final_sql": "SELECT name, grade FROM Highschooler; ```",
+        "input_tokens": 1366,
+        "output_tokens": 294,
+        "time": 18.843609666999782,
+        "question": "What is the grade of each high schooler?",
+        "db_id": "network_1",
+        "gold_query": "SELECT grade FROM Highschooler"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Template_Type_Code\nFROM Ref_Template_Types\nWHERE Template_Type_Description = 'Book';\n```",
+        "final_sql": "SELECT Template_Type_Code FROM Ref_Template_Types WHERE Template_Type_Description = 'Book'; ```",
+        "input_tokens": 1693,
+        "output_tokens": 336,
+        "time": 22.561339249999946,
+        "question": "Return the type code of the template type with the description \"Book\".",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description  =  \"Book\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT MAX(Share) AS MaximumShare, MIN(Share) AS MinimumShare FROM TV_series; ```",
+        "input_tokens": 2039,
+        "output_tokens": 493,
+        "time": 33.6650622919999,
+        "question": "What is the maximum and minimum share for the TV series?",
+        "db_id": "tvshow",
+        "gold_query": "SELECT max(SHARE) , min(SHARE) FROM TV_series;"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Manager_name, District FROM shop ORDER BY Number_products DESC LIMIT 1; ```",
+        "input_tokens": 2124,
+        "output_tokens": 633,
+        "time": 40.997880542000075,
+        "question": "What are the manager name and district of the shop that sells the largest number of products?",
+        "db_id": "employee_hire_evaluation",
+        "gold_query": "SELECT manager_name ,  district FROM shop ORDER BY number_products DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Name FROM conductor WHERE Nationality != 'USA';\n```",
+        "final_sql": "SELECT Name FROM conductor WHERE Nationality NOT IN ('USA', 'U.S.A.', 'United States') OR Nationality IS NULL; ```",
+        "input_tokens": 1948,
+        "output_tokens": 387,
+        "time": 25.375996833000045,
+        "question": "What are the names of conductors whose nationalities are not \"USA\"?",
+        "db_id": "orchestra",
+        "gold_query": "SELECT Name FROM conductor WHERE Nationality != 'USA'"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(*) FROM concert WHERE Stadium_ID = (  SELECT Stadium_ID  FROM stadium  ORDER BY Capacity DESC  LIMIT 1 ); ```",
+        "input_tokens": 1881,
+        "output_tokens": 355,
+        "time": 21.270031791000065,
+        "question": "What are the number of concerts that occurred in the stadium with the largest capacity ?",
+        "db_id": "concert_singer",
+        "gold_query": "select count(*) from concert where stadium_id = (select stadium_id from stadium order by capacity desc limit 1)"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT c.Name FROM country AS c JOIN countrylanguage AS cl1 ON c.Code = cl1.CountryCode JOIN countrylanguage AS cl2 ON c.Code = cl2.CountryCode WHERE cl1.Language = 'English' AND cl2.Language = 'French'; ```",
+        "input_tokens": 2023,
+        "output_tokens": 659,
+        "time": 41.00004875000013,
+        "question": "Give the names of nations that speak both English and French.",
+        "db_id": "world_1",
+        "gold_query": "SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code  =  T2.CountryCode WHERE T2.Language  =  \"English\" INTERSECT SELECT T1.Name FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code  =  T2.CountryCode WHERE T2.Language  =  \"French\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT p.first_name, AVG(r.ranking) as average_ranking FROM players p JOIN rankings r ON p.player_id = r.player_id GROUP BY p.player_id; ```",
+        "input_tokens": 2172,
+        "output_tokens": 489,
+        "time": 30.295549542000117,
+        "question": "What are the first names of all players, and their average rankings?",
+        "db_id": "wta_1",
+        "gold_query": "SELECT avg(ranking) ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id GROUP BY T1.first_name"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT s.last_name FROM Students s LEFT JOIN Student_Enrolment se ON s.student_id = se.student_id JOIN Addresses a ON s.current_address_id = a.address_id WHERE a.state_province_county = 'North Carolina' AND se.student_id IS NULL; ```",
+        "input_tokens": 3763,
+        "output_tokens": 711,
+        "time": 44.31858008300014,
+        "question": "Find the last name of the students who currently live in the state of North Carolina but have not registered in any degree program.",
+        "db_id": "student_transcripts_tracking",
+        "gold_query": "SELECT T1.last_name FROM Students AS T1 JOIN Addresses AS T2 ON T1.current_address_id  =  T2.address_id WHERE T2.state_province_county  =  'NorthCarolina' EXCEPT SELECT DISTINCT T3.last_name FROM Students AS T3 JOIN Student_Enrolment AS T4 ON T3.student_id  =  T4.student_id"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Year, AVG(Weight) as AverageWeight FROM cars_data GROUP BY Year ORDER BY Year; ```",
+        "input_tokens": 2249,
+        "output_tokens": 516,
+        "time": 33.22423941699981,
+        "question": "What is the average weight of cars each year?",
+        "db_id": "car_1",
+        "gold_query": "SELECT avg(Weight) ,  YEAR FROM CARS_DATA GROUP BY YEAR;"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT p.first_name, p.last_name FROM Professionals p JOIN Treatments t ON p.professional_id = t.professional_id WHERE t.cost_of_treatment < (SELECT AVG(cost_of_treatment) FROM Treatments); ```",
+        "input_tokens": 3254,
+        "output_tokens": 765,
+        "time": 49.70620116700002,
+        "question": "What are the first name and last name of the professionals who have done treatment with cost below average?",
+        "db_id": "dog_kennels",
+        "gold_query": "SELECT DISTINCT T1.first_name ,  T1.last_name FROM Professionals AS T1 JOIN Treatments AS T2 WHERE cost_of_treatment  <  ( SELECT avg(cost_of_treatment) FROM Treatments )"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Name FROM teacher WHERE Hometown != 'Little Lever Urban District'; ```",
+        "input_tokens": 1682,
+        "output_tokens": 437,
+        "time": 38.31462641600001,
+        "question": "List the name of teachers whose hometown is not `` Little Lever Urban District '' .",
+        "db_id": "course_teach",
+        "gold_query": "select name from teacher where hometown != \"little lever urban district\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Student.StuID, COUNT(Has_Pet.PetID) AS NumberOfPets\nFROM Student\nJOIN Has_Pet ON Student.StuID = Has_Pet.StuID\nGROUP BY Student.StuID;\n```",
+        "final_sql": "SELECT Has_Pet.StuID, COUNT(Has_Pet.PetID) AS NumberOfPets FROM Has_Pet GROUP BY Has_Pet.StuID; ```",
+        "input_tokens": 1817,
+        "output_tokens": 510,
+        "time": 33.67485879200012,
+        "question": "For students who have pets , how many pets does each student have ? list their ids instead of names .",
+        "db_id": "pets_1",
+        "gold_query": "select count(*) ,  t1.stuid from student as t1 join has_pet as t2 on t1.stuid  =  t2.stuid group by t1.stuid"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT \"transcript_date\", \"other_details\" FROM \"Transcripts\" ORDER BY \"transcript_date\" ASC LIMIT 1; ```",
+        "input_tokens": 3085,
+        "output_tokens": 274,
+        "time": 18.153387874999908,
+        "question": "When is the first transcript released? List the date and details.",
+        "db_id": "student_transcripts_tracking",
+        "gold_query": "SELECT transcript_date ,  other_details FROM Transcripts ORDER BY transcript_date ASC LIMIT 1"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Document_ID, Document_Name, Document_Description FROM Documents;\n```",
+        "final_sql": "SELECT Document_ID, Document_Name, Document_Description FROM Documents; ```",
+        "input_tokens": 1490,
+        "output_tokens": 178,
+        "time": 10.501702374999923,
+        "question": "What are the ids, names, and descriptions for all documents?",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT document_id ,  document_name ,  document_description FROM Documents"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Record_Company, COUNT(*) AS NumberOfOrchestras FROM orchestra GROUP BY Record_Company; ```",
+        "input_tokens": 2131,
+        "output_tokens": 643,
+        "time": 51.56901349999998,
+        "question": "How many orchestras does each record company manage?",
+        "db_id": "orchestra",
+        "gold_query": "SELECT Record_Company ,  COUNT(*) FROM orchestra GROUP BY Record_Company"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT id FROM TV_Channel WHERE id NOT IN (   SELECT Channel FROM Cartoon   WHERE Directed_by = 'Ben Jones' ); ```",
+        "input_tokens": 2422,
+        "output_tokens": 719,
+        "time": 50.64573820800001,
+        "question": "find the id of tv channels that do not play any cartoon directed by Ben Jones.",
+        "db_id": "tvshow",
+        "gold_query": "SELECT id FROM TV_Channel EXCEPT SELECT channel FROM cartoon WHERE directed_by  =  'Ben Jones'"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT TV_Channel.Country FROM Cartoon JOIN TV_Channel ON Cartoon.Channel = TV_Channel.id WHERE Cartoon.Written_by = 'Todd Casey'; ```",
+        "input_tokens": 2104,
+        "output_tokens": 617,
+        "time": 31.934488041000122,
+        "question": "which countries' tv channels are playing some cartoon written by Todd Casey?",
+        "db_id": "tvshow",
+        "gold_query": "SELECT T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.written_by  =  'Todd Casey'"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT H.name FROM Highschooler H JOIN (SELECT liked_id, COUNT(*) as like_count    FROM Likes    GROUP BY liked_id) as L ON H.ID = L.liked_id ORDER BY L.like_count DESC LIMIT 1; ```",
+        "input_tokens": 1746,
+        "output_tokens": 421,
+        "time": 27.466962665999972,
+        "question": "What is the name of the high schooler who has the greatest number of likes?",
+        "db_id": "network_1",
+        "gold_query": "SELECT T2.name FROM Likes AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Highschooler.ID, COUNT(Friend.friend_id) AS NumberOfFriends FROM Highschooler LEFT JOIN Friend ON Highschooler.ID = Friend.student_id GROUP BY Highschooler.ID; ```",
+        "input_tokens": 1605,
+        "output_tokens": 519,
+        "time": 33.598671417000105,
+        "question": "Show the student IDs and numbers of friends corresponding to each.",
+        "db_id": "network_1",
+        "gold_query": "SELECT student_id ,  count(*) FROM Friend GROUP BY student_id"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT   d.Document_ID,   d.Document_Name,   COUNT(p.Paragraph_ID) AS NumberOfParagraphs FROM   \"Documents\" d LEFT JOIN   \"Paragraphs\" p ON d.Document_ID = p.Document_ID GROUP BY   d.Document_ID,   d.Document_Name; ```",
+        "input_tokens": 1710,
+        "output_tokens": 380,
+        "time": 22.045977541999946,
+        "question": "What are the ids and names of each document, as well as the number of paragraphs in each?",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT T1.document_id ,  T2.document_name ,  count(*) FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id GROUP BY T1.document_id"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Title, Directed_by\nFROM Cartoon\nORDER BY Original_air_date;\n```",
+        "final_sql": "SELECT Title, Directed_by FROM Cartoon ORDER BY Original_air_date; ```",
+        "input_tokens": 1603,
+        "output_tokens": 275,
+        "time": 17.728552083000068,
+        "question": "list all cartoon titles and their directors ordered by their air date",
+        "db_id": "tvshow",
+        "gold_query": "SELECT title ,  Directed_by FROM Cartoon ORDER BY Original_air_date"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM airlines WHERE Country = 'USA';\n```",
+        "final_sql": "SELECT COUNT(*) FROM airlines WHERE TRIM(UPPER(Country)) = 'UNITED STATES'; ```",
+        "input_tokens": 1519,
+        "output_tokens": 372,
+        "time": 18.223817082999858,
+        "question": "Return the number of airlines in the USA.",
+        "db_id": "flight_2",
+        "gold_query": "SELECT count(*) FROM AIRLINES WHERE Country  =  \"USA\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Name\nFROM country\nWHERE Continent = 'Asia'\nORDER BY LifeExpectancy ASC\nLIMIT 1;\n```",
+        "final_sql": "SELECT Name FROM country WHERE Continent = 'Asia' AND LifeExpectancy IS NOT NULL ORDER BY LifeExpectancy ASC LIMIT 1; ```",
+        "input_tokens": 1926,
+        "output_tokens": 551,
+        "time": 27.532238083000266,
+        "question": "Give the name of the country in Asia with the lowest life expectancy.",
+        "db_id": "world_1",
+        "gold_query": "SELECT Name FROM country WHERE Continent  =  \"Asia\" ORDER BY LifeExpectancy LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT PetType, AVG(pet_age) as average_age, MAX(pet_age) as maximum_age FROM Pets GROUP BY PetType; ```",
+        "input_tokens": 1920,
+        "output_tokens": 549,
+        "time": 28.380269624999983,
+        "question": "Find the average and maximum age for each type of pet.",
+        "db_id": "pets_1",
+        "gold_query": "SELECT avg(pet_age) ,  max(pet_age) ,  pettype FROM pets GROUP BY pettype"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM Pets WHERE weight > 10;\n```",
+        "final_sql": "SELECT COUNT(*) FROM Pets WHERE weight > 10; ```",
+        "input_tokens": 1386,
+        "output_tokens": 221,
+        "time": 15.479459332999795,
+        "question": "How many pets have a greater weight than 10?",
+        "db_id": "pets_1",
+        "gold_query": "SELECT count(*) FROM pets WHERE weight  >  10"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Nationality\nFROM people\nGROUP BY Nationality\nHAVING COUNT(*) >= 2;\n```",
+        "final_sql": "SELECT TRIM(UPPER(Nationality)) AS CleanedNationality FROM people GROUP BY CleanedNationality HAVING COUNT(*) >= 2; ```",
+        "input_tokens": 1421,
+        "output_tokens": 333,
+        "time": 19.033880999999838,
+        "question": "What are the nationalities that are shared by at least two people?",
+        "db_id": "poker_player",
+        "gold_query": "SELECT Nationality FROM people GROUP BY Nationality HAVING COUNT(*)  >=  2"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT a.Airline FROM airlines a JOIN flights f ON a.uid = f.Airline WHERE f.SourceAirport = 'AHD'; ```",
+        "input_tokens": 1657,
+        "output_tokens": 451,
+        "time": 27.691363417000048,
+        "question": "What are airlines that have some flight departing from airport 'AHD'?",
+        "db_id": "flight_2",
+        "gold_query": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid  =  T2.Airline WHERE T2.SourceAirport  =  \"AHD\""
+    },
+    {
+        "baseline_sql": "```sql\nSELECT c.Name, c.Population, c.HeadOfState\nFROM country c\nORDER BY c.SurfaceArea DESC\nLIMIT 1;\n```",
+        "final_sql": "SELECT c.Name, c.Population, c.HeadOfState FROM country c ORDER BY c.SurfaceArea DESC LIMIT 1; ```",
+        "input_tokens": 1804,
+        "output_tokens": 418,
+        "time": 24.239071500000136,
+        "question": "Give the name, population, and head of state for the country that has the largest area.",
+        "db_id": "world_1",
+        "gold_query": "SELECT Name ,  population ,  HeadOfState FROM country ORDER BY SurfaceArea DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(DISTINCT \"Location\") FROM \"shop\"; ```",
+        "input_tokens": 1327,
+        "output_tokens": 147,
+        "time": 9.672606042000098,
+        "question": "Count the number of distinct store locations.",
+        "db_id": "employee_hire_evaluation",
+        "gold_query": "SELECT count(DISTINCT LOCATION) FROM shop"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT S.Fname, S.Sex\nFROM Student S\nJOIN Has_Pet HP ON S.StuID = HP.StuID\nGROUP BY S.StuID\nHAVING COUNT(HP.PetID) > 1\n```",
+        "final_sql": "SELECT S.Fname, S.Sex FROM Student S JOIN Has_Pet HP ON S.StuID = HP.StuID GROUP BY S.StuID, S.Fname, S.Sex HAVING COUNT(HP.PetID) > 1 ```",
+        "input_tokens": 1751,
+        "output_tokens": 539,
+        "time": 31.259320749999915,
+        "question": "Find the first name and gender of student who have more than one pet.",
+        "db_id": "pets_1",
+        "gold_query": "SELECT T1.fname ,  T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid  =  T2.stuid GROUP BY T1.stuid HAVING count(*)  >  1"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM Highschooler WHERE grade IN (9, 10);\n```",
+        "final_sql": "SELECT COUNT(*) FROM Highschooler WHERE grade IN (9, 10); ```",
+        "input_tokens": 1588,
+        "output_tokens": 443,
+        "time": 23.75570537500016,
+        "question": "Count the number of high schoolers in grades 9 or 10.",
+        "db_id": "network_1",
+        "gold_query": "SELECT count(*) FROM Highschooler WHERE grade  =  9 OR grade  =  10"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT s.Name FROM singer s JOIN song sg ON s.Singer_ID = sg.Singer_ID WHERE sg.Sales > 300000; ```",
+        "input_tokens": 1424,
+        "output_tokens": 292,
+        "time": 18.37489841600018,
+        "question": "Show distinct names of singers that have songs with sales more than 300000.",
+        "db_id": "singer",
+        "gold_query": "SELECT DISTINCT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID  =  T2.Singer_ID WHERE T2.Sales  >  300000"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT H.name FROM Highschooler H JOIN (SELECT F.student_id, COUNT(F.friend_id) AS friend_count    FROM Friend F    GROUP BY F.student_id) AS FC ON H.ID = FC.student_id ORDER BY FC.friend_count DESC LIMIT 1; ```",
+        "input_tokens": 1583,
+        "output_tokens": 403,
+        "time": 24.6014089170003,
+        "question": "Return the name of the high school student with the most friends.",
+        "db_id": "network_1",
+        "gold_query": "SELECT T2.name FROM Friend AS T1 JOIN Highschooler AS T2 ON T1.student_id  =  T2.id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT ml.Model FROM model_list ml JOIN cars_data cd ON ml.ModelId = cd.Id WHERE cd.Year > 1980; ```",
+        "input_tokens": 2228,
+        "output_tokens": 510,
+        "time": 35.0422359170002,
+        "question": "Which distinct car models are the produced after 1980?",
+        "db_id": "car_1",
+        "gold_query": "SELECT DISTINCT T1.model FROM MODEL_LIST AS T1 JOIN CAR_NAMES AS T2 ON T1.model  =  T2.model JOIN CARS_DATA AS T3 ON T2.MakeId  =  T3.id WHERE T3.year  >  1980;"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT MAX(strftime('%Y-%m-%d', 'now') - strftime('%Y-%m-%d', date_of_birth)) AS age_of_oldest_dog FROM Dogs; ```",
+        "input_tokens": 2637,
+        "output_tokens": 425,
+        "time": 34.29040158299995,
+        "question": "What is the age of the oldest dog?",
+        "db_id": "dog_kennels",
+        "gold_query": "SELECT max(age) FROM Dogs"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT b.breed_name, s.size_description\nFROM Breeds b\nCROSS JOIN Sizes s;\n```",
+        "final_sql": "SELECT b.breed_name, s.size_description FROM Breeds b CROSS JOIN Sizes s; ```",
+        "input_tokens": 2664,
+        "output_tokens": 319,
+        "time": 27.294107791999977,
+        "question": "What are all the possible breed type and size type combinations?",
+        "db_id": "dog_kennels",
+        "gold_query": "SELECT DISTINCT breed_code ,  size_code FROM dogs"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT p.first_name || ' ' || p.last_name AS winner_name, r.ranking_points FROM players p JOIN (  SELECT winner_id, COUNT(*) AS wins  FROM matches  GROUP BY winner_id  ORDER BY wins DESC  LIMIT 1 ) AS m ON p.player_id = m.winner_id JOIN rankings r ON p.player_id = r.player_id ORDER BY r.ranking_date DESC LIMIT 1; ```",
+        "input_tokens": 2693,
+        "output_tokens": 864,
+        "time": 46.33557970799984,
+        "question": "What is the name of the winner who has won the most matches, and how many rank points does this player have?",
+        "db_id": "wta_1",
+        "gold_query": "SELECT winner_name ,  winner_rank_points FROM matches GROUP BY winner_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT Earnings FROM poker_player ORDER BY Earnings DESC; ```",
+        "input_tokens": 1485,
+        "output_tokens": 313,
+        "time": 33.60583141699999,
+        "question": "What are the earnings of poker players, ordered descending by value?",
+        "db_id": "poker_player",
+        "gold_query": "SELECT Earnings FROM poker_player ORDER BY Earnings DESC"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT o.Orchestra FROM orchestra o LEFT JOIN performance p ON o.Orchestra_ID = p.Orchestra_ID WHERE p.Orchestra_ID IS NULL; ```",
+        "input_tokens": 1835,
+        "output_tokens": 426,
+        "time": 26.388905832999626,
+        "question": "List the names of orchestras that have no performance.",
+        "db_id": "orchestra",
+        "gold_query": "SELECT Orchestra FROM orchestra WHERE Orchestra_ID NOT IN (SELECT Orchestra_ID FROM performance)"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT d.Document_ID, d.Document_Name\nFROM Documents d\nJOIN Paragraphs p ON d.Document_ID = p.Document_ID\nGROUP BY d.Document_ID, d.Document_Name\nORDER BY COUNT(p.Paragraph_ID) DESC\nLIMIT 1;\n```",
+        "final_sql": "SELECT d.Document_ID, d.Document_Name FROM Documents d JOIN Paragraphs p ON d.Document_ID = p.Document_ID GROUP BY d.Document_ID, d.Document_Name ORDER BY COUNT(p.Paragraph_ID) DESC LIMIT 1; ```",
+        "input_tokens": 2099,
+        "output_tokens": 698,
+        "time": 43.61180495899998,
+        "question": "What is the document id and name with greatest number of paragraphs?",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT T1.document_id ,  T2.document_name FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id GROUP BY T1.document_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT ml.Model FROM cars_data cd JOIN car_names cn ON cd.Id = cn.MakeId JOIN model_list ml ON cn.Model = ml.ModelId WHERE cd.Cylinders = 4 ORDER BY CAST(cd.Horsepower AS INTEGER) DESC LIMIT 1; ```",
+        "input_tokens": 2367,
+        "output_tokens": 634,
+        "time": 46.58887962500012,
+        "question": "For all of the 4 cylinder cars, which model has the most horsepower?",
+        "db_id": "car_1",
+        "gold_query": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId  =  T2.Id WHERE T2.Cylinders  =  4 ORDER BY T2.horsepower DESC LIMIT 1;"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT DISTINCT d.\"Document_ID\" FROM \"Documents\" d JOIN \"Paragraphs\" p1 ON d.\"Document_ID\" = p1.\"Document_ID\" JOIN \"Paragraphs\" p2 ON d.\"Document_ID\" = p2.\"Document_ID\" WHERE LOWER(p1.\"Paragraph_Text\") LIKE '%brazil%' AND LOWER(p2.\"Paragraph_Text\") LIKE '%ireland%' AND p1.\"Paragraph_ID\" <> p2.\"Paragraph_ID\"; ```",
+        "input_tokens": 2265,
+        "output_tokens": 845,
+        "time": 41.85026466699992,
+        "question": "Show the document id with paragraph text 'Brazil' and 'Ireland'.",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT document_id FROM Paragraphs WHERE paragraph_text  =  'Brazil' INTERSECT SELECT document_id FROM Paragraphs WHERE paragraph_text  =  'Ireland'"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT P.Paragraph_ID, P.Paragraph_Text\nFROM Paragraphs P\nJOIN Documents D ON P.Document_ID = D.Document_ID\nWHERE D.Document_Name = 'Welcome to NY';\n```",
+        "final_sql": "SELECT Paragraph_ID FROM Paragraphs JOIN Documents ON Paragraphs.Document_ID = Documents.Document_ID WHERE Documents.Document_Name = 'Welcome to NY'; ```",
+        "input_tokens": 1698,
+        "output_tokens": 278,
+        "time": 17.44286983400025,
+        "question": "Show all paragraph ids and texts for the document with name 'Welcome to NY'.",
+        "db_id": "cre_Doc_Template_Mgt",
+        "gold_query": "SELECT T1.paragraph_id ,   T1.paragraph_text FROM Paragraphs AS T1 JOIN Documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.Document_Name  =  'Welcome to NY'"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT COUNT(*) FROM flights\nJOIN airlines ON flights.Airline = airlines.uid\nWHERE airlines.Abbreviation = 'B6';\n```",
+        "final_sql": "SELECT COUNT(*) FROM flights JOIN airlines ON flights.Airline = airlines.uid WHERE airlines.Abbreviation = 'B6'; ```",
+        "input_tokens": 1689,
+        "output_tokens": 496,
+        "time": 27.813128750000033,
+        "question": "Give the number of Jetblue Airways flights.",
+        "db_id": "flight_2",
+        "gold_query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T1.Airline  =  T2.uid WHERE T2.Airline = \"JetBlue Airways\""
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT COUNT(DISTINCT \"Nationality\") FROM \"people\"; ```",
+        "input_tokens": 1077,
+        "output_tokens": 164,
+        "time": 14.082800791999944,
+        "question": "Count the number of different nationalities.",
+        "db_id": "poker_player",
+        "gold_query": "SELECT count(DISTINCT Nationality) FROM people"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Name, Location, District FROM shop ORDER BY Number_products DESC;\n```",
+        "final_sql": "SELECT Name, Location, District FROM shop ORDER BY Number_products DESC; ```",
+        "input_tokens": 1622,
+        "output_tokens": 321,
+        "time": 18.276310208000268,
+        "question": "Return the name, location and district of all shops in descending order of number of products.",
+        "db_id": "employee_hire_evaluation",
+        "gold_query": "SELECT name ,  LOCATION ,  district FROM shop ORDER BY number_products DESC"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT Citizenship, COUNT(*) AS NumberOfSingers FROM singer GROUP BY Citizenship;\n```",
+        "final_sql": "SELECT Citizenship, COUNT(*) AS NumberOfSingers FROM singer GROUP BY Citizenship; ```",
+        "input_tokens": 1582,
+        "output_tokens": 438,
+        "time": 22.29144374999987,
+        "question": "Show different citizenship of singers and the number of singers of each citizenship.",
+        "db_id": "singer",
+        "gold_query": "SELECT Citizenship ,  COUNT(*) FROM singer GROUP BY Citizenship"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT V.created, V.state, V.phone_number FROM VOTES V JOIN CONTESTANTS C ON V.contestant_number = C.contestant_number WHERE C.contestant_name = 'Tabatha Gehling'; ```",
+        "input_tokens": 2133,
+        "output_tokens": 708,
+        "time": 40.016648499999974,
+        "question": "What are the create dates, states, and phone numbers of the votes that were for the contestant named 'Tabatha Gehling'?",
+        "db_id": "voter_1",
+        "gold_query": "SELECT T2.created ,  T2.state ,  T2.phone_number FROM contestants AS T1 JOIN votes AS T2 ON T1.contestant_number  =  T2.contestant_number WHERE T1.contestant_name  =  'Tabatha Gehling'"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT p.Name\nFROM poker_player pp\nJOIN people p ON pp.People_ID = p.People_ID\nORDER BY pp.Final_Table_Made ASC;\n```",
+        "final_sql": "SELECT p.Name FROM poker_player pp JOIN people p ON pp.People_ID = p.People_ID ORDER BY pp.Final_Table_Made ASC; ```",
+        "input_tokens": 1363,
+        "output_tokens": 333,
+        "time": 22.87326675000031,
+        "question": "List the names of poker players ordered by the final tables made in ascending order.",
+        "db_id": "poker_player",
+        "gold_query": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Final_Table_Made"
+    },
+    {
+        "baseline_sql": "```sql\nSELECT PetType, AVG(weight) AS average_weight\nFROM Pets\nGROUP BY PetType;\n```",
+        "final_sql": "SELECT PetType, AVG(weight) AS average_weight FROM Pets GROUP BY PetType; ```",
+        "input_tokens": 1487,
+        "output_tokens": 303,
+        "time": 18.903467999999975,
+        "question": "Find the average weight for each pet type.",
+        "db_id": "pets_1",
+        "gold_query": "SELECT avg(weight) ,  pettype FROM pets GROUP BY pettype"
+    },
+    {
+        "baseline_sql": "Error",
+        "final_sql": "SELECT c.series_name FROM TV_Channel c JOIN TV_series s ON c.id = s.Channel WHERE s.Episode = 'A Love of a Lifetime'; ```",
+        "input_tokens": 2256,
+        "output_tokens": 656,
+        "time": 33.89134608300037,
+        "question": "What is the TV Channel of TV series with Episode \"A Love of a Lifetime\"? List the TV Channel's series name.",
+        "db_id": "tvshow",
+        "gold_query": "SELECT T1.series_name FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T2.Episode = \"A Love of a Lifetime\";"
+    }
+]

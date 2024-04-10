@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
     # Add elements to list below for experiments
     NUM_MATCHES_LIST = [3]
-    MODEL_LIST = ['gpt-3.5-turbo']
+    MODEL_LIST = ['gpt-4-1106-preview']
 
     # Get training dataset
     # Filter to only keep db_id, question, question_toks, and query
