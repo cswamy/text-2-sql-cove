@@ -17,14 +17,16 @@ Implementation has four stages:
 
 ## Usage ##
 1. Clone the repo with `git clone https://github.com/cswamy/text-2-sql-cove.git`
-2. Navigate into repo folder and run `pip install requirements.txt`
-3. Run `export OPENAI_API_KEY="<your-openai-key>"` to setup OpenAI connection
-4. Create predictions against the dev dataset using `python cove.py`. 🚨 This will run predictions against the full dev spider dataset (found in `data/dev.json`). To run it against a smaller sample, use options. For e.g., `python cove.py --sample_size 100 --seed 42`
-5. Output folder can be found under `experiments/` with `pred_sqls.txt` for predicted sqls, `gold_sqls.txt` for gold sqls from dev dataset and `outputs.json` file which is a list of dictionaries containing outputs for each sample in dev dataset. A `metrics.json` file is also created under `experiments/` with some useful statistics (e.g. token counts) for the run
-6. Run `cd evaluation` to enter folder with evaluation scripts from Spider
-7. Run `python evaluation.py --gold '<PATH TO OUTPUT FOLDER>/gold_sqls.txt' --pred '<PATH TO OUTPUT FOLDER>/pred_sqls.txt' --etype  'all' --db '../data/database/' --table '../data/tables.json' > '<PATH TO OUTPUT FOLDER>/result.txt'`
-8. This will create a `result.txt` file in the output folder with evaluation metrics from Spider
-9. _Optional: To analyse sql results, go into the experiments folder and run `python sql_executor.py --outputfile <PATH TO outputs.json> > <PATH TO OUTPUT FOLDER>/sql_results.txt`. This will create an `sql_results.txt` file under output folder where you can analyse sql outputs_ 
+2. Navigate into repo folder
+3. Create a python virtunal env with `python -m venv venv` and activate it with `source venv/bin/activate`
+4. Install dependencies with `pip install -r requirements.txt`
+5. Run `export OPENAI_API_KEY="<your-openai-key>"` to setup OpenAI connection
+6. Create predictions against the dev dataset using `python cove.py`. 🚨 This will run predictions against the full dev spider dataset (found in `data/dev.json`). To run it against a smaller sample, use options. For e.g., `python cove.py --sample_size 100 --seed 42`
+7. Output folder can be found under `experiments/` with `pred_sqls.txt` for predicted sqls, `gold_sqls.txt` for gold sqls from dev dataset and `outputs.json` file which is a list of dictionaries containing outputs for each sample in dev dataset. A `metrics.json` file is also created under `experiments/` with some useful statistics (e.g. token counts) for the run
+8. Run `cd evaluation` to enter folder with evaluation scripts from Spider
+9. Run `python evaluation.py --gold '<PATH TO OUTPUT FOLDER>/gold_sqls.txt' --pred '<PATH TO OUTPUT FOLDER>/pred_sqls.txt' --etype  'all' --db '../data/database/' --table '../data/tables.json' > '<PATH TO OUTPUT FOLDER>/result.txt'`
+10. This will create a `result.txt` file in the output folder with evaluation metrics from Spider
+11. _Optional: To analyse sql results, go into the experiments folder and run `python sql_executor.py --outputfile <PATH TO outputs.json> > <PATH TO OUTPUT FOLDER>/sql_results.txt`. This will create an `sql_results.txt` file under output folder where you can analyse sql outputs_ 
 
 ## Results ##
 Results to some experiments run on the full dev dataset:
